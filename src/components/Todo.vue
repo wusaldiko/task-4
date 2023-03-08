@@ -6,6 +6,7 @@
         placeholder="New Task"
         class="todo__form-input"
         v-model="newTaskText"
+        maxlength="25"
       />
       <button
         class="todo__form-btn"
