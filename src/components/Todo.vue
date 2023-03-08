@@ -7,7 +7,13 @@
         class="todo__form-input"
         v-model="newTaskText"
       />
-      <button class="todo__form-btn" @click="addTodo()">&#x2b;</button>
+      <button
+        class="todo__form-btn"
+        @click="addTodo()"
+        :disabled="!this.newTaskText.trim().length"
+      >
+        &#x2b;
+      </button>
     </div>
     <todo-list :todos="TODOS" />
     <div class="todo__btns">
@@ -83,6 +89,11 @@ export default {
       border: none;
       color: teal;
       cursor: pointer;
+
+      &:disabled {
+        cursor: default;
+        opacity: 0.5;
+      }
     }
   }
 
