@@ -38,7 +38,6 @@ let actions = {
 
   SAVE_TODO: ({ commit }, payload) => {
     if (state.todos.length === 5) return alert("Limit!");
-
     commit("ADD_TODO", [...state.todos, payload]);
     sessionStorage.setItem("todos", JSON.stringify(state.todos));
   },
@@ -49,13 +48,21 @@ let actions = {
   },
 
   CLEAR_COMPLETED: ({ commit }) => {
-    commit("FILTER_TODOS", ({ isDone }) => isDone);
+    commit("FILTER_TODOS", ({ isDone }) => !isDone);
     sessionStorage.setItem("todos", JSON.stringify(state.todos));
   },
 
   REMOVE_TODO: ({ commit }, payload) => {
-    commit("FILTER_TODOS", ({ id }) => {
-      id !== payload;
+    commit("FILTER_TODOS", ({ id }) => id !== payload);
+    sessionStorage.setItem("todos", JSON.stringify(state.todos));
+  },
+
+  SET_TODO_DONE: ({ commit }, payload) => {
+    commit("FILTER_TODOS", (todo) => {
+      if (todo.id === payload) {
+        todo.isDone = !todo.isDone;
+      }
+      return todo;
     });
     sessionStorage.setItem("todos", JSON.stringify(state.todos));
   },

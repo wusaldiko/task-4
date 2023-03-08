@@ -1,5 +1,11 @@
 <template>
-  <todo-item v-if="todos.length" v-for="todo of todos" :todo="todo" />
+  <todo-item
+    v-if="todos.length"
+    v-for="todo of todos"
+    :key="todo.id"
+    :todo="todo"
+    class="todo__item"
+  />
   <h4 v-else style="color: red">You don't have task</h4>
 </template>
 <script>
@@ -17,4 +23,4 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped></style>
